@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-29 11:29:16
- * @LastEditTime: 2021-07-29 15:33:57
+ * @LastEditTime: 2021-07-29 16:22:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \electron-app\main.js
@@ -9,6 +9,7 @@
 
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
+const { showNotification } = require('./renderer.js')
 const createWindow = async() => {
   const win = new BrowserWindow({
     width: 800,
@@ -32,7 +33,7 @@ app.whenReady().then(() => {
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-})
+}).then( showNotification )
 
 // 关闭所有窗口时退出所有应用(排除在macOs darwin 条件)
 app.on('window-all-closed', function() {
